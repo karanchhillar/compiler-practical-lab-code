@@ -11,7 +11,7 @@ int getPrecedence(char op) {
     if (op == '^') return 3;
     else if (op == '*' || op == '/') return 2;
     else if (op == '+' || op == '-') return 1;
-    else return 0; // for '('
+    else return 0; // for ')'
 }
 
 // Function to convert infix to prefix
@@ -27,12 +27,12 @@ string infixToPrefix(const string& infix) {
         if (isalnum(ch)) {
             // Operand: Add to the prefix expression
             prefix += ch;
-        } else if (ch == ')') {
-            // Right parenthesis: Push onto the stack
-            operators.push(ch);
         } else if (ch == '(') {
-            // Left parenthesis: Pop and add operators to the prefix until a matching ')' is encountered
-            while (!operators.empty() && operators.top() != ')') {
+            // left parenthesis: Push onto the stack
+            operators.push(ch);
+        } else if (ch == ')') {
+            // right parenthesis: Pop and add operators to the prefix until a matching ')' is encountered
+            while (!operators.empty() && operators.top() != '(') {
                 prefix += operators.top();
                 operators.pop();
             }
